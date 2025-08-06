@@ -1,76 +1,94 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>MatrixCargo - Central de APIs</title>
+  <title>MatrixCargo APIs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      padding: 40px;
+      background-color: #0e0e0e;
+      color: #f2f2f2;
       text-align: center;
     }
 
-    h1 {
-      color: #0055aa;
-      margin-bottom: 40px;
+    .container {
+      padding: 2rem;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      max-width: 900px;
-      margin: 0 auto;
+    .logo img {
+      width: 120px;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: #00ff88;
     }
 
     .card {
-      background: #fff;
+      background-color: #1e1e1e;
       border-radius: 8px;
-      padding: 24px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      transition: 0.2s;
+      padding: 1rem;
+      margin: 1rem auto;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
     }
 
-    .card:hover {
-      transform: translateY(-5px);
+    .card h2 {
+      color: #00ff88;
+      margin-bottom: 0.5rem;
     }
 
     .card a {
+      display: block;
+      color: #ffffff;
       text-decoration: none;
-      color: #0077cc;
-      font-size: 18px;
-      font-weight: bold;
+      margin: 0.3rem 0;
+      transition: color 0.2s ease;
     }
 
-    .card small {
-      display: block;
-      margin-top: 6px;
-      font-size: 14px;
-      color: #666;
+    .card a:hover {
+      color: #00ff88;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #777;
     }
   </style>
 </head>
 <body>
-  <h1>📘 Central de Documentações MatrixCargo</h1>
-  <div class="grid">
-    <div class="card">
-      <a href="https://painel-logistico-api-homol.matrixcargo.com.br/api/docs" target="_blank">Painel Logístico (Pública)</a>
-      <small>Swagger da API pública do painel</small>
+  <div class="container">
+    <div class="logo">
+      <img src="image.jpg" alt="MatrixCargo Logo">
     </div>
+
+    <h1>MatrixCargo - APIs de Integração</h1>
+
     <div class="card">
-      <a href="https://painel-logistico-api-homol.matrixcargo.com.br/api/internal/docs" target="_blank">Painel Logístico (Interna)</a>
-      <small>Swagger da API interna do painel</small>
+      <h2>Tracking API</h2>
+      <a href="https://tracking-api-homol.matrixcargo.com.br/api/docs" target="_blank">/docs</a>
+      <a href="https://tracking-api-homol.matrixcargo.com.br/api/docs-json" target="_blank">/docs-json</a>
+      <a href="https://tracking-api-homol.matrixcargo.com.br/api/internal/docs" target="_blank">/internal/docs</a>
+      <a href="https://tracking-api-homol.matrixcargo.com.br/api/internal/docs-json" target="_blank">/internal/docs-json</a>
     </div>
+
     <div class="card">
-      <a href="https://tracking-api-homol.matrixcargo.com.br/api/docs" target="_blank">Tracking (Pública)</a>
-      <small>Swagger da API pública de tracking</small>
+      <h2>Painel Logístico API</h2>
+      <a href="https://painel-logistico-api-homol.matrixcargo.com.br/api/docs" target="_blank">/docs</a>
+      <a href="https://painel-logistico-api-homol.matrixcargo.com.br/api/docs-json" target="_blank">/docs-json</a>
+      <a href="https://painel-logistico-api-homol.matrixcargo.com.br/api/internal/docs" target="_blank">/internal/docs</a>
+      <a href="https://painel-logistico-api-homol.matrixcargo.com.br/api/internal/docs-json" target="_blank">/internal/docs-json</a>
     </div>
-    <div class="card">
-      <a href="https://tracking-api-homol.matrixcargo.com.br/api/internal/docs" target="_blank">Tracking (Interna)</a>
-      <small>Swagger da API interna de tracking</small>
-    </div>
+
+    <footer>
+      © MatrixCargo - Todos os direitos reservados
+    </footer>
   </div>
 </body>
 </html>
