@@ -2,89 +2,184 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>MatrixCargo APIs</title>
+  <title>Documentações MatrixCargo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    :root {
+      --primary: #00ff88;
+      --bg: #0f0f0f;
+      --card-bg: #1a1a1a;
+      --text: #f2f2f2;
+      --muted: #999;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #0e0e0e;
-      color: #f2f2f2;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    header {
       text-align: center;
+      padding: 2rem 1rem 1rem;
     }
 
-    .container {
-      padding: 2rem;
-    }
-
-    .logo img {
+    header img {
       width: 120px;
       margin-bottom: 1rem;
     }
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      color: #00ff88;
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 1rem;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     .card {
-      background-color: #1e1e1e;
-      border-radius: 8px;
-      padding: 1rem;
-      margin: 1rem auto;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.15);
     }
 
     .card h2 {
-      color: #00ff88;
-      margin-bottom: 0.5rem;
+      margin-top: 0;
+      font-size: 1.4rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
     }
 
-    .card a {
-      display: block;
-      color: #ffffff;
+    .links a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #222;
+      color: var(--text);
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
       text-decoration: none;
-      margin: 0.3rem 0;
-      transition: color 0.2s ease;
+      margin-bottom: 0.5rem;
+      transition: background 0.3s;
     }
 
-    .card a:hover {
-      color: #00ff88;
+    .links a:hover {
+      background-color: #333;
+    }
+
+    .links a span {
+      font-size: 0.9rem;
+    }
+
+    .copy-button {
+      background-color: transparent;
+      color: var(--muted);
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .copy-button:hover {
+      color: var(--primary);
     }
 
     footer {
-      margin-top: 2rem;
+      text-align: center;
       font-size: 0.85rem;
-      color: #777;
+      color: var(--muted);
+      margin-top: 3rem;
+      padding: 2rem 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .links a {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .copy-button {
+        margin-top: 0.3rem;
+        padding-left: 0.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo">
-      <img src="image.jpg" alt="MatrixCargo Logo">
-    </div>
+  <header>
+    <img src="image.png" alt="MatrixCargo Logo">
+    <h1>APIs MatrixCargo - Documentação</h1>
+  </header>
 
-    <h1>MatrixCargo - APIs de Integração</h1>
+  <div class="container">
 
     <div class="card">
       <h2>Tracking API</h2>
-      <a href="https://tracking-api-homol.matrixcargo.com.br/api/docs" target="_blank">/docs</a>
-      <a href="https://tracking-api-homol.matrixcargo.com.br/api/internal/docs" target="_blank">/internal/docs</a>
+      <div class="links">
+        <a href="https://tracking-api-homol.matrixcargo.com.br/api/docs" target="_blank">
+          <span>/api/docs</span>
+          <button class="copy-button" onclick="copyToClipboard('https://tracking-api-homol.matrixcargo.com.br/api/docs')">Copiar</button>
+        </a>
+        <a href="https://tracking-api-homol.matrixcargo.com.br/api/docs-json" target="_blank">
+          <span>/api/docs-json</span>
+          <button class="copy-button" onclick="copyToClipboard('https://tracking-api-homol.matrixcargo.com.br/api/docs-json')">Copiar</button>
+        </a>
+        <a href="https://tracking-api-homol.matrixcargo.com.br/api/internal/docs" target="_blank">
+          <span>/api/internal/docs</span>
+          <button class="copy-button" onclick="copyToClipboard('https://tracking-api-homol.matrixcargo.com.br/api/internal/docs')">Copiar</button>
+        </a>
+        <a href="https://tracking-api-homol.matrixcargo.com.br/api/internal/docs-json" target="_blank">
+          <span>/api/internal/docs-json</span>
+          <button class="copy-button" onclick="copyToClipboard('https://tracking-api-homol.matrixcargo.com.br/api/internal/docs-json')">Copiar</button>
+        </a>
+      </div>
     </div>
 
     <div class="card">
       <h2>Painel Logístico API</h2>
-      <a href="https://painel-logistico-api-homol.matrixcargo.com.br/api/docs" target="_blank">/docs</a>
-      <a href="https://painel-logistico-api-homol.matrixcargo.com.br/api/internal/docs" target="_blank">/internal/docs</a>
+      <div class="links">
+        <a href="https://painel-logistico-api-homol.matrixcargo.com.br/api/docs" target="_blank">
+          <span>/api/docs</span>
+          <button class="copy-button" onclick="copyToClipboard('https://painel-logistico-api-homol.matrixcargo.com.br/api/docs')">Copiar</button>
+        </a>
+        <a href="https://painel-logistico-api-homol.matrixcargo.com.br/api/docs-json" target="_blank">
+          <span>/api/docs-json</span>
+          <button class="copy-button" onclick="copyToClipboard('https://painel-logistico-api-homol.matrixcargo.com.br/api/docs-json')">Copiar</button>
+        </a>
+        <a href="https://painel-logistico-api-homol.matrixcargo.com.br/api/internal/docs" target="_blank">
+          <span>/api/internal/docs</span>
+          <button class="copy-button" onclick="copyToClipboard('https://painel-logistico-api-homol.matrixcargo.com.br/api/internal/docs')">Copiar</button>
+        </a>
+        <a href="https://painel-logistico-api-homol.matrixcargo.com.br/api/internal/docs-json" target="_blank">
+          <span>/api/internal/docs-json</span>
+          <button class="copy-button" onclick="copyToClipboard('https://painel-logistico-api-homol.matrixcargo.com.br/api/internal/docs-json')">Copiar</button>
+        </a>
+      </div>
     </div>
-
-    <footer>
-      © MatrixCargo - Todos os direitos reservados
-    </footer>
   </div>
+
+  <footer>
+    &copy; 2025 MatrixCargo | Documento gerado automaticamente para fins de integração.
+  </footer>
+
+  <script>
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Link copiado: " + text);
+      }, () => {
+        alert("Falha ao copiar.");
+      });
+    }
+  </script>
 </body>
 </html>
