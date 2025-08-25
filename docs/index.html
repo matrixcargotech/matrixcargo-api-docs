@@ -1,298 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
+<script>
+  // Configuração das APIs - Edite aqui para adicionar/remover APIs
+  const docs = [
+    {
+      "id": "tracking",
+      "title": "Tracking API",
+      "description": "Rastreamento de cargas em tempo real e consulta de status de entrega.",
+      "baseUrl": "https://tracking-api-homol.matrixcargo.com.br",
+      "endpoints": [
+        {
+          "path": "/api/docs"
+        },
+        {
+          "path": "/api/internal/docs"
+        }
+      ]
+    },
+    {
+      "id": "painel-logistico",
+      "title": "Painel Logístico API",
+      "description": "APIs para gestão logística, relatórios e controle operacional.",
+      "baseUrl": "https://painel-logistico-api-homol.matrixcargo.com.br",
+      "endpoints": [
+        {
+          "path": "/api/docs"
+        },
+        {
+          "path": "/api/internal/docs"
+        }
+      ]
+    }
+  ];
+</script>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MatrixCargo - Documentação das APIs</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" href="image.jpg" type="image/jpeg">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f6f7f8;
-      color: #1f2d3d;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 48px 20px;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      /* centraliza o grupo logo+brand */
-      gap: 20px;
-      margin-bottom: 28px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #e9eef2;
-    }
-
-    .logo {
-      width: 72px;
-      height: 72px;
-      border-radius: 12px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #ffffff;
-      box-shadow: 0 6px 18px rgba(19, 30, 45, 0.06);
-      flex: 0 0 72px;
-    }
-
-    .logo img {
-      width: 56px;
-      height: 56px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .brand {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      flex: 0 1 720px;
-      /* evita que cresça demais e desloque o centro */
-      align-items: center;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #122433;
-      margin: 0;
-    }
-
-    .subtitle {
-      color: #596b75;
-      font-size: 1rem;
-      max-width: 780px;
-    }
-
-    .search-container {
-      margin: 24px 0 0 0;
-      max-width: 480px;
-      width: 100%;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1px solid #e2e8ec;
-      border-radius: 10px;
-      font-size: 15px;
-      transition: box-shadow 0.15s ease, border-color 0.15s ease;
-      background: #fff;
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: #1fa85a;
-      box-shadow: 0 6px 18px rgba(31, 168, 90, 0.08);
-    }
-
-    .apis-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      margin-top: 24px;
-    }
-
-    .api-section {
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 22px;
-      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.04);
-      border: 1px solid #eef5f7;
-      min-height: 180px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .api-header {
-      margin-bottom: 14px;
-    }
-
-    .api-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #122433;
-      margin-bottom: 8px;
-    }
-
-    .api-description {
-      color: #6b7880;
-      font-size: 0.95rem;
-      line-height: 1.45;
-    }
-
-    .api-links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .link-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 12px;
-      background: #f9fafd;
-      border-radius: 8px;
-      border: 1px solid #eef6f4;
-      gap: 12px;
-    }
-
-    .link-path {
-      font-family: 'Monaco', 'Consolas', monospace;
-      color: #1fa85a;
-      font-weight: 600;
-      font-size: 14px;
-      word-break: break-all;
-      flex: 1 1 auto;
-      min-width: 0;
-    }
-
-    .link-actions {
-      flex: 0 0 auto;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .btn {
-      padding: 8px 12px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.08s ease, box-shadow 0.08s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn:active {
-      transform: translateY(1px);
-    }
-
-    .btn-copy {
-      background: #ffffff;
-      color: #37515f;
-      border: 1px solid #d7e2e6;
-      padding: 8px 10px;
-    }
-
-    .btn-copy.copied {
-      background: #1fa85a;
-      color: white;
-      border-color: #1fa85a;
-    }
-
-    .btn-open {
-      background: #1fa85a;
-      color: white;
-      padding: 8px 12px;
-      border-radius: 8px;
-      box-shadow: 0 6px 18px rgba(31, 168, 90, 0.12);
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      padding-top: 24px;
-      border-top: 1px solid #e9eef2;
-      color: #8a97a0;
-      font-size: 14px;
-    }
-
-    .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #1fa85a;
-      color: white;
-      padding: 12px 18px;
-      border-radius: 8px;
-      font-weight: 600;
-      transform: translateX(120%);
-      transition: transform 0.28s cubic-bezier(.2, .9, .3, 1);
-      z-index: 1000;
-      font-size: 14px;
-    }
-
-    .notification.show {
-      transform: translateX(0);
-    }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 12px;
-        padding-bottom: 12px;
-        border-bottom: none;
-      }
-
-      .brand .subtitle {
-        max-width: 100%;
-        padding: 0 8px;
-      }
-
-      .search-container {
-        margin-top: 8px;
-        width: 100%;
-        max-width: 520px;
-      }
-
-      .container {
-        padding: 28px 16px;
-      }
-
-      .api-section {
-        padding: 18px;
-      }
-
-      .link-item {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .link-actions {
-        width: 100%;
-        justify-content: flex-end;
-      }
-    }
-
-    :focus-visible {
-      outline: 3px solid rgba(31, 168, 90, 0.18);
-      outline-offset: 3px;
-    }
-
-    .link-item:hover {
-      box-shadow: 0 6px 20px rgba(16, 24, 32, 0.04);
-      transform: translateY(-2px);
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -315,83 +64,12 @@
 
     <main>
       <div class="apis-container" id="apisContainer">
-        <div class="api-section" data-api="tracking">
-          <div class="api-header">
-            <h2 class="api-title">Tracking API</h2>
-            <p class="api-description">
-              Rastreamento de cargas em tempo real e consulta de status de entrega.
-            </p>
-          </div>
-          <div class="api-links">
-            <div class="link-item">
-              <span class="link-path">/api/docs</span>
-              <div class="link-actions">
-                <button class="btn btn-copy"
-                  onclick="copyLink('https://tracking-api-homol.matrixcargo.com.br/api/docs', this)">
-                  Copiar
-                </button>
-                <a href="https://tracking-api-homol.matrixcargo.com.br/api/docs" target="_blank" class="btn btn-open">
-                  Abrir
-                </a>
-              </div>
-            </div>
-            <div class="link-item">
-              <span class="link-path">/api/internal/docs</span>
-              <div class="link-actions">
-                <button class="btn btn-copy"
-                  onclick="copyLink('https://tracking-api-homol.matrixcargo.com.br/api/internal/docs', this)">
-                  Copiar
-                </button>
-                <a href="https://tracking-api-homol.matrixcargo.com.br/api/internal/docs" target="_blank"
-                  class="btn btn-open">
-                  Abrir
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="api-section" data-api="painel-logistico">
-          <div class="api-header">
-            <h2 class="api-title">Painel Logístico API</h2>
-            <p class="api-description">
-              APIs para gestão logística, relatórios e controle operacional.
-            </p>
-          </div>
-          <div class="api-links">
-            <div class="link-item">
-              <span class="link-path">/api/docs</span>
-              <div class="link-actions">
-                <button class="btn btn-copy"
-                  onclick="copyLink('https://painel-logistico-api-homol.matrixcargo.com.br/api/docs', this)">
-                  Copiar
-                </button>
-                <a href="https://painel-logistico-api-homol.matrixcargo.com.br/api/docs" target="_blank"
-                  class="btn btn-open">
-                  Abrir
-                </a>
-              </div>
-            </div>
-            <div class="link-item">
-              <span class="link-path">/api/internal/docs</span>
-              <div class="link-actions">
-                <button class="btn btn-copy"
-                  onclick="copyLink('https://painel-logistico-api-homol.matrixcargo.com.br/api/internal/docs', this)">
-                  Copiar
-                </button>
-                <a href="https://painel-logistico-api-homol.matrixcargo.com.br/api/internal/docs" target="_blank"
-                  class="btn btn-open">
-                  Abrir
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- APIs serão carregadas dinamicamente via JavaScript -->
       </div>
     </main>
 
     <footer>
-      <p>&copy; 2025 MatrixCargo. Todos os direitos reservados.</p>
+      <p>&copy; <span id="currentYear"></span> MatrixCargo. Todos os direitos reservados.</p>
     </footer>
   </div>
 
@@ -400,6 +78,91 @@
   </div>
 
   <script>
+    // Atualizar o ano atual no rodapé
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+    // Renderizar APIs
+    function renderApis() {
+      const container = document.getElementById('apisContainer');
+      container.innerHTML = '';
+
+      docs.forEach(api => {
+        const apiSection = createApiSection(api);
+        container.appendChild(apiSection);
+      });
+    }
+
+    // Criar seção de API
+    function createApiSection(api) {
+      const section = document.createElement('div');
+      section.className = 'api-section';
+      section.setAttribute('data-api', api.id);
+
+      const header = document.createElement('div');
+      header.className = 'api-header';
+
+      const title = document.createElement('h2');
+      title.className = 'api-title';
+      title.textContent = api.title;
+
+      const description = document.createElement('p');
+      description.className = 'api-description';
+      description.textContent = api.description;
+
+      header.appendChild(title);
+      header.appendChild(description);
+
+      const linksContainer = document.createElement('div');
+      linksContainer.className = 'api-links';
+
+      api.endpoints.forEach(endpoint => {
+        const linkItem = createLinkItem(endpoint, api.baseUrl);
+        linksContainer.appendChild(linkItem);
+      });
+
+      section.appendChild(header);
+      section.appendChild(linksContainer);
+
+      return section;
+    }
+
+    // Criar item de link
+    function createLinkItem(endpoint, baseUrl) {
+      const linkItem = document.createElement('div');
+      linkItem.className = 'link-item';
+
+      const pathSpan = document.createElement('span');
+      pathSpan.className = 'link-path';
+      pathSpan.textContent = endpoint.path;
+
+      const actionsDiv = document.createElement('div');
+      actionsDiv.className = 'link-actions';
+
+      const fullUrl = baseUrl + endpoint.path;
+
+      // Botão copiar
+      const copyButton = document.createElement('button');
+      copyButton.className = 'btn btn-copy';
+      copyButton.textContent = 'Copiar';
+      copyButton.onclick = () => copyLink(fullUrl, copyButton);
+
+      // Botão abrir
+      const openButton = document.createElement('a');
+      openButton.href = fullUrl;
+      openButton.target = '_blank';
+      openButton.className = 'btn btn-open';
+      openButton.textContent = 'Abrir';
+
+      actionsDiv.appendChild(copyButton);
+      actionsDiv.appendChild(openButton);
+
+      linkItem.appendChild(pathSpan);
+      linkItem.appendChild(actionsDiv);
+
+      return linkItem;
+    }
+
+    // Função para copiar link
     function copyLink(url, button) {
       navigator.clipboard.writeText(url).then(function () {
         // Feedback no botão
@@ -423,20 +186,28 @@
     }
 
     // Funcionalidade de busca
-    document.getElementById('searchInput').addEventListener('input', function (e) {
-      const searchTerm = e.target.value.toLowerCase();
-      const apiSections = document.querySelectorAll('.api-section');
+    function initializeSearch() {
+      document.getElementById('searchInput').addEventListener('input', function (e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const apiSections = document.querySelectorAll('.api-section');
 
-      apiSections.forEach(section => {
-        const title = section.querySelector('.api-title').textContent.toLowerCase();
-        const description = section.querySelector('.api-description').textContent.toLowerCase();
+        apiSections.forEach(section => {
+          const title = section.querySelector('.api-title').textContent.toLowerCase();
+          const description = section.querySelector('.api-description').textContent.toLowerCase();
 
-        if (title.includes(searchTerm) || description.includes(searchTerm) || searchTerm === '') {
-          section.classList.remove('hidden');
-        } else {
-          section.classList.add('hidden');
-        }
+          if (title.includes(searchTerm) || description.includes(searchTerm) || searchTerm === '') {
+            section.style.display = 'flex';
+          } else {
+            section.style.display = 'none';
+          }
+        });
       });
+    }
+
+    // Inicializar quando a página carregar
+    document.addEventListener('DOMContentLoaded', function () {
+      renderApis();
+      initializeSearch();
     });
   </script>
 </body>
